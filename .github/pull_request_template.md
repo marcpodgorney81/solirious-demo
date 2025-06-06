@@ -9,6 +9,6 @@
 
 ## Checklist 
 
-[] Lint checks passing 
+- [] Lint checks passing 
 
-[] Unit tests added and passing 
+- [] Unit tests added and passing 
