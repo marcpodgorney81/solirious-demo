@@ -1,0 +1,26 @@
+{
+  "name": "solirious-demo",
+  "version": "1.0.0",
+  "description": "solirious demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcpodgorney81/solirious-demo.git"
+  },
+  "author": "Marc Podgorney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcpodgorney81/solirious-demo/issues"
+  },
+  "homepage": "https://github.com/marcpodgorney81/solirious-demo#readme",
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.29"
+  }
+}
