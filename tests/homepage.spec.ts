@@ -1,19 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { testURL } from '../consts';
+import { HomePage } from '../page-objects/homepage';
 
-test('page should have title - html loaded', async ({ page }) => {
-  await page.goto(testURL);
+test('page should be loaded with key components', async ({ page }) => {
+  const homepage = new HomePage(page);
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Calculate holiday entitlement/);
-});
+  await homepage.goto();
 
-test('key components should be visible', async ({ page }) => {
-  await page.goto(testURL);
-
-  // heading should be displayed 
-  await expect(page.getByRole('heading', { name: 'Calculate holiday entitlement' })).toBeVisible();
-
-  // start now button should be displayed 
-  await expect(page.getByRole('button', { name: 'Start now' })).toBeVisible();
+  await homepage.pageLoaded();
 });
