@@ -27,6 +27,12 @@ You can use the following command to run the tests `npm run ui:tests`
 
 Alternativley you can run tests using the activity sidebar- details here https://playwright.dev/docs/getting-started-vscode#opening-the-testing-sidebar 
 
+## Test output 
+
+When running a set of tests it will generate an html report - `index.html`, which can be found in the `playwright-report` folder 
+
+This allows you to see details of which tests where run, and also filter by status etc. 
+
 ## Tests in deployment 
 
 The tests are also configured to run as part of the deployment process - see `workflows/playright.yml` 
@@ -34,5 +40,7 @@ The tests are also configured to run as part of the deployment process - see `wo
 They are set to run with the following triggers 
 
 - On opening pull request 
-- On pushes to a branch (PR) 
+- On each push to a branch (PR) 
+
+You can find the deployments in this tab https://github.com/marcpodgorney81/solirious-demo/actions 
 
