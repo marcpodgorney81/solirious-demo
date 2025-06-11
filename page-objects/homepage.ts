@@ -7,7 +7,9 @@ export class HomePage {
   readonly gettingStartedHeader: Locator;
   readonly cookieBanner: Locator;
   readonly acceptCookiesButton: Locator;
+  readonly rejectCookiesButton: Locator;
   readonly acceptCookiesMessage: Locator;
+  readonly rejectCookiesMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +18,8 @@ export class HomePage {
     this.cookieBanner = page.getByTestId('global-cookie-message');
     this.acceptCookiesButton = page.getByRole('button', { name: /Accept/ });
     this.acceptCookiesMessage = page.getByText(/have accepted/ );
+    this.rejectCookiesButton = page.getByRole('button', { name: /Reject/ });
+    this.rejectCookiesMessage = page.getByText(/have rejected/ );
   }
 
   async goto() {
@@ -31,6 +35,12 @@ export class HomePage {
     // Expect that when clicking to accept confirmation message is displayed 
     await this.acceptCookiesButton.click();
     await expect(this.acceptCookiesMessage).toBeVisible();
+  }
+
+  async rejectCookies() {
+    // Expect that when clicking to reject confirmation message is displayed 
+    await this.rejectCookiesButton.click();
+    await expect(this.rejectCookiesMessage).toBeVisible();
   }
 
   async pageLoaded() {
