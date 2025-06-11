@@ -22,3 +22,10 @@ test('accpeting cookies should show confirmation message', async ({ page }) => {
   await homepage.goto();
   await homepage.acceptCookies();
 });
+
+test('rejecting cookies should show confirmation message', async ({ page }) => {
+  const homepage = new HomePage(page);
+
+  await homepage.goto();
+  await homepage.rejectCookies();
+});
