@@ -12,7 +12,7 @@ export class CookiesPage {
     // Expect we are on cookies page 
     expect(this.page.url()).toBe(cookiesPageURL);
 
-    // Expect a title, header and get started button 
+    // Expect a title 
     await expect(this.page).toHaveTitle(/Cookies on GOV.UK/);
   }
 }

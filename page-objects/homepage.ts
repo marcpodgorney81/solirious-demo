@@ -64,6 +64,10 @@ export class HomePage {
     await expect(this.cookieBanner).not.toBeVisible();
   }
 
+  async start() {
+    await this.getStartedLink.click();
+  }
+
   async checkForAcceptCookies() {
     const cookies = await this.page.context().cookies();
 
