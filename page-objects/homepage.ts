@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import { testURL } from '../consts'; 
+import { testURL, cookiesAcceptedValue, cookiesRejectedValue } from '../consts'; 
+import { cookieExistsWthValue } from '../page-helpers/cookies';
 
 export class HomePage {
   readonly page: Page;
@@ -36,7 +37,7 @@ export class HomePage {
   }
 
   async doesNotHaveCookieBanner() {
-    // Expect that cookie banner is displayed 
+    // Expect that cookie banner is not displayed 
     await expect(this.cookieBanner).not.toBeVisible();
   }
 
@@ -46,36 +47,35 @@ export class HomePage {
     await expect(this.acceptCookiesMessage).toBeVisible();
   }
 
-  async viewCookies() {
-    await this.viewCookiesLink.click();
-  }
-
   async rejectCookies() {
     // Expect that when clicking to reject confirmation message is displayed 
     await this.rejectCookiesButton.click();
     await expect(this.rejectCookiesMessage).toBeVisible();
   }
 
+  async viewCookies() {
+    await this.viewCookiesLink.click();
+  }
+
+  async hideCookies() {
+    await this.hideCookiesBannerButton.click();
+
+    // Expect that cookie banner is not displayed 
+    await expect(this.cookieBanner).not.toBeVisible();
+  }
+
   async checkForAcceptCookies() {
     const cookies = await this.page.context().cookies();
-    const policyCookie = cookies.find((cookie) => cookie.name === 'cookies_policy');
-    expect(policyCookie).toBeDefined();
-    expect(policyCookie.value).toEqual("{\"essential\":true,\"settings\":true,\"usage\":true,\"campaigns\":true}");
 
-    const preferencesSetCookie = cookies.find((cookie) => cookie.name === 'cookies_preferences_set');
-    expect(preferencesSetCookie).toBeDefined();
-    expect(preferencesSetCookie.value).toEqual("true");
+    expect(cookieExistsWthValue(cookies, 'cookies_policy', cookiesAcceptedValue)).toBeTruthy();
+    expect(cookieExistsWthValue(cookies, 'cookies_preferences_set', 'true')).toBeTruthy();
   }
 
   async checkForRejectCookies() {
     const cookies = await this.page.context().cookies();
-    const policyCookie = cookies.find((cookie) => cookie.name === 'cookies_policy');
-    expect(policyCookie).toBeDefined();
-    expect(policyCookie.value).toEqual("{\"essential\":true,\"settings\":false,\"usage\":false,\"campaigns\":false}");
 
-    const preferencesSetCookie = cookies.find((cookie) => cookie.name === 'cookies_preferences_set');
-    expect(preferencesSetCookie).toBeDefined();
-    expect(preferencesSetCookie.value).toEqual("true");
+    expect(cookieExistsWthValue(cookies, 'cookies_policy', cookiesRejectedValue)).toBeTruthy();
+    expect(cookieExistsWthValue(cookies, 'cookies_preferences_set', 'true')).toBeTruthy();
   }
 
   async pageLoaded() {

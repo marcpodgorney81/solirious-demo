@@ -1,8 +1,7 @@
 import { test } from '@playwright/test';
 import { HomePage } from '../page-objects/homepage';
 import { CookiesPage } from '../page-objects/cookiesPage';
-import { createCookie } from '../page-helpers/cookies';
-import { cookiesAcceptedValue, testURL } from '../consts'; 
+import { policyCookie, preferencesCookie } from '../consts'; 
 
 test('accepting cookies should show confirmation message', async ({ page }) => {
   const homepage = new HomePage(page);
@@ -26,6 +25,14 @@ test('accepting cookies should set expected cookies in browser', async ({ page }
   await homepage.checkForAcceptCookies();
 });
 
+test('clicking hide message should hide cookie banner', async ({ page }) => {
+  const homepage = new HomePage(page);
+
+  await homepage.goto();
+  await homepage.acceptCookies();
+  await homepage.hideCookies();
+});
+
 test('rejecting cookies should set expected cookies in browser', async ({ page }) => {
   const homepage = new HomePage(page);
 
@@ -36,9 +43,6 @@ test('rejecting cookies should set expected cookies in browser', async ({ page }
 
 test('cookie banner should not be displayed if cookies are set', async ({ page }) => {
   // set cookies in context 
-  const policyCookie = createCookie('cookies_policy', cookiesAcceptedValue, testURL);
-  const preferencesCookie = createCookie('cookies_preferences_set', 'true', testURL);
-
   page.context().addCookies([policyCookie, preferencesCookie]);
 
   const homepage = new HomePage(page);
