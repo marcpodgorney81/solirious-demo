@@ -1,15 +1,15 @@
-import { Cookie } from '@playwright/test';
+import { Cookie } from "@playwright/test";
 
-interface BrowserCookie {
-  name: string;
-  value: string;
-  url?: string;
+export const getCookieByName = (cookies: Cookie[], name: string): Cookie => {
+  const cookie = cookies.find((cookie) => cookie.name === name);
+
+  return cookie;
 }
 
-export const doesCookieExist = (cookies: Cookie[]) => {
+export const cookieExistsWthValue = (cookies: Cookie[], name: string, value: string) => {  
+  const cookie = getCookieByName(cookies, name);
 
-} 
+  if (!cookie) return false;
 
-export const createCookie = (name: string, value: string, url: string): BrowserCookie => {
-  return {name, value, url};
+  return cookie.value === value;
 }
