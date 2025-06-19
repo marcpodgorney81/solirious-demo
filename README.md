@@ -15,6 +15,31 @@ In order to install and setup the test suite you should follow these steps
 2. Install dependencies `npm install` 
 3. Install playright extension for VS Code - https://playwright.dev/docs/getting-started-vscode - this will give you access to the testing toolbar as described in how to run tests 
 
+## Test setup 
+
+Tests can be found in the `tests` folder, and are arranged by logical grouping - 
+
+| Test                   | Function                                       |
+| ---------------------- | ---------------------------------------------- |
+| `homepage`             | Tests that webpage has loaded correcly         |
+| `cookies`              | Tests for cookie banner                        |
+| `calculator-behaviour` | Tests for general behavious of calculator tool |
+| `calculator-errors`    | Tests for error handling of calculator tool    |
+| `calculator-e2e`       | e2e tests for calculator tool                  |
+
+### Test locators 
+As much as possible tests make use of the `getByRole` locator - as this is a preferred choice to identify components as per their accessibility role - particularly interactive elements such as button, link 
+
+Where possible the `getByTestId` locator is used to identify components by a unique id - as this is also a desirable method 
+
+## Test configuration 
+
+Configuration for the tests can be found in the `playwright.config.ts` file in root of the project - the settings here control verious aspects of the test runs, e.g. 
+
+- where files are outputted to 
+- if screenshots/video capture is enabled 
+- which browsers to run tests in 
+
 ## Running tests 
 
 The test suite can be run using one of these methods  
@@ -32,6 +57,12 @@ Alternativley you can run tests using the activity sidebar- details here https:/
 When running a set of tests it will generate an html report - `index.html`, which can be found in the `playwright-report` folder 
 
 This allows you to see details of which tests where run, and also filter by status etc. 
+
+### Screenshots 
+
+In the event that tests fail it will generate a screenshot showing the browser status at that point - this is included in the playwright html report 
+
+Also screenshots are outputted to the `test-results` folder 
 
 ## Tests in deployment 
 
