@@ -19,13 +19,13 @@ In order to install and setup the test suite you should follow these steps
 
 Tests can be found in the `tests` folder, and are arranged by logical grouping - 
 
-| Test                   | Function                                       |
-| ---------------------- | ---------------------------------------------- |
-| `homepage`             | Tests that webpage has loaded correcly         |
-| `cookies`              | Tests for cookie banner                        |
-| `calculator-behaviour` | Tests for general behavious of calculator tool |
-| `calculator-errors`    | Tests for error handling of calculator tool    |
-| `calculator-e2e`       | e2e tests for calculator tool                  |
+| Test                   | Function                                        |
+| ---------------------- | ----------------------------------------------- |
+| `homepage`             | Tests that webpage has loaded correcly          |
+| `cookies`              | Tests for cookie banner                         |
+| `calculator-behaviour` | Tests for general behaviours of calculator tool |
+| `calculator-errors`    | Tests for error handling of calculator tool     |
+| `calculator-e2e`       | e2e tests for calculator tool                   |
 
 ### Test locators 
 As much as possible tests make use of the `getByRole` locator - as this is a preferred choice to identify components as per their accessibility role - particularly interactive elements such as button, link 
@@ -83,7 +83,8 @@ With more time available there are certain enhancements and additions that would
 - expanding on the error handling and e2e scenarios 
 - expanding on some of the assertion checks (e.g. for the e2e scenarios) 
 - tidy up some of the naming conventions 
-- implement unit testing and linting 
+- implement unit testing and linting
+- review test run strategy (e.g. browser usage, workers, parallelisation) 
 
 Also (and more a discussion to be had with developers) it would be much more intuative if the key elements (e.g. calculation summary text) were assigned an `id` (or more ideally a `test-id`) - as would enable tests to use a more stable and reliable type of locator - currently in some cases are having to use text locator, which is not as ideal given that it may be subject to updates  
 
